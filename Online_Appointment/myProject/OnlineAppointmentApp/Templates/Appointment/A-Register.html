@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Logins</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/A-loginS.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+</head>
+<body>
+	<div class="container">
+		<div class="contact-box">
+			<div class="left"></div>
+			<div class="right">
+                <div class="logo">
+                <img src="{% static './img/logo.png' %}" alt="easyclass" />
+                <h4>Appointment</h4>
+              </div>
+				<h2>Register Form</h2>
+                <form method="POST">
+                {% csrf_token %}
+                    {{form.username}}
+                    <input type="text" class="field" name="username" placeholder="Username">
+                    <input type="email" class="field" name="email" placeholder="Email"> 
+                    <input type="password" class="field" name="password1" placeholder="Password"> 
+                    <input type="password" class="field" name="password2" placeholder="Re type Password"> 
+                    <br><br>
+                    <p>* Password must contain: at least 8 characters, at least 1 uppercase letter, and at least 1 digit *</p>
+                    <br>
+                    <a href="{% url 'alogin' %}"> <button type="button" class="btn">Back</button></a>
+                    <button class="btn">Submit</button>
+                </form>
+			</div>
+		</div>
+	</div>
+    <footer class="foots">
+        Online Appointment
+    
+    </footer>
+</body>
+</html>

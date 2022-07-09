@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" href="{% static 'css/U-LoginS.css' %}" />
+  </head>
+  <body>
+    <main>
+      <div class="box">
+        <div class="inner-box">
+          <div class="forms-wrap">
+            <form method="POST" autocomplete="on" class="sign-in-form">
+              {% csrf_token %}
+              <div class="logo">
+                <img src="{% static './img/logo.png' %}" alt="easyclass" />
+                <h4>Appointment</h4>
+              </div>
+
+              <div class="heading">
+                <h2>Welcome Back</h2>
+                <h6>Not registred yet?</h6>
+                <a href="#" class="toggle">Sign up</a>
+              </div>
+              
+              {% for message in messages %}
+              <h3 id="messages" style="color: red;">{{message}}</h3>
+              {% endfor %}
+              
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <input type="text"  name="user" class="input-field" />
+                  <label>Username</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input type="password" name="pass" class="input-field"/>
+                  <label>Password</label>
+                </div>
+
+                
+                <button class="sign-btn" >Submit</button>
+                <a href="{% url 'Home' %}"> <button type="button" class="sign-btn">Back</button></a>
+                <p class="text">
+                  Forgotten your password or you login datails?
+                  <a href="#">Get help</a> signing in
+                </p>
+              </div>
+            </form>
+         
+
+            <form method='POST' action=""  class="sign-up-form">
+              {% csrf_token %}
+              <div class="logo">
+                <img src="{% static './img/logo.png' %}" alt="easyclass" />
+                <h4>Appointment</h4>
+              </div>
+              <div class="heading">
+                <h2>Get Started</h2>
+                <h6>Already have an account?</h6>
+                <a href="#" class="toggle">Sign in</a>
+              </div>
+
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <input name='fullname' type="text" class="input-field" required/>
+                  <label>FullName</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input name="username" type="text" class="input-field" required/>
+                  <label>Username</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input name="emails" type="email" class="input-field" required/>
+                  <label>Email</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input name="contacts" type="text" class="input-field" required/>
+                  <label>Contact</label>
+                </div>
+      
+                  <div class="input-wrap">
+                  <input name="passwords" type="password" class="input-field" required/>
+                  <label>Password</label>
+                </div>
+                  <div class="input-wrap">
+                  <input name="confirm" type="password" class="input-field" required/>
+                  <label>Confirm Password</label>
+              
+                  </div>
+                    <div class="form-wrapper">
+                    <select name="gender" id="" class="form-control">
+                      <option value="" disabled selected>Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                    </div>
+                  <div class="form-wrapper">
+                    <select name="users" id="" class="form-control">
+                      <option value="" disabled selected>UserType</option>
+                      <option value="Student">Student</option>
+                      <option value="Alumni">Alumni</option>
+                      <option value="Inquirer">Inquirer</option>
+                      <option value="Guardian">Guardian</option>
+                    </select>
+                    </div>
+                  
+                  <button type ='submit' class="sign-btn">Submit</button>
+                </form>
+             </div>
+          </div>
+        
+
+          <div class="carousel">
+            <div class="images-wrapper">
+              <img src="{% static './img/image1.png' %}" class="image img-1 show" alt="" />
+              <img src="{% static './img/image2.png' %}" class="image img-2" alt="" />
+              <img src="{% static './img/image3.png' %}" class="image img-3" alt="" />
+            </div>
+
+            <div class="text-slider">
+              <div class="text-wrap">
+                <div class="text-group">
+                  <h2>Create your own Account</h2>
+                  <h2>Visit Our School</h2>
+                  <h2>Invite Others to Visit Us.</h2>
+                </div>
+              </div>
+
+              <div class="bullets">
+                <span class="active" data-value="1"></span>
+                <span data-value="2"></span>
+                <span data-value="3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Javascript file -->
+
+    <script src="{% static 'js/app.js' %}"></script>
+           <footer class="foots">
+        Online Appointment
+    
+    </footer>
+  </body>
+</html>

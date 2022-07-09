@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <div class="table-responsive"></div>
+  <table class="table"></table>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+  <link href='https://fonts.googleapis.com/css?family=Bai Jamjuree' rel='stylesheet'>
+  <link rel="stylesheet" href="{% static 'css/CSS-syntax.css' %}">
+</head>
+<body>
+
+<h1>Access Table View</h1>
+<div class="search">
+  <div class="icon"></div>
+  <div class="input">
+  <input class="text" type="text" placeholder="Search..."  data-table="customers-list">
+</div>
+    </div>
+    <script>
+      (function(document) {
+          'use strict';
+
+          var TableFilter = (function(myArray) {
+              var search_input;
+
+              function _onInputSearch(e) {
+                  search_input = e.target;
+                  var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                  myArray.forEach.call(tables, function(table) {
+                      myArray.forEach.call(table.tBodies, function(tbody) {
+                          myArray.forEach.call(tbody.rows, function(row) {
+                              var text_content = row.textContent.toLowerCase();
+                              var search_val = search_input.value.toLowerCase();
+                              row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                          });
+                      });
+                  });
+              }
+
+              return {
+                  init: function() {
+                      var inputs = document.getElementsByClassName('search');
+                      myArray.forEach.call(inputs, function(input) {
+                          input.oninput = _onInputSearch;
+                      });
+                  }
+              };
+          })(Array.prototype);
+
+          document.addEventListener('readystatechange', function() {
+              if (document.readyState === 'complete') {
+                  TableFilter.init();
+              }
+          });
+
+      })(document);
+  </script>
+        <script>
+          (function(document) {
+              'use strict';
+  
+              var TableFilter = (function(myArray) {
+                  var search_input;
+  
+                  function _onInputSearch(e) {
+                      search_input = e.target;
+                      var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                      myArray.forEach.call(tables, function(table) {
+                          myArray.forEach.call(table.tBodies, function(tbody) {
+                              myArray.forEach.call(tbody.rows, function(row) {
+                                  var text_content = row.textContent.toLowerCase();
+                                  var search_val = search_input.value.toLowerCase();
+                                  row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                              });
+                          });
+                      });
+                  }
+  
+                  return {
+                      init: function() {
+                          var inputs = document.getElementsByClassName('search');
+                          myArray.forEach.call(inputs, function(input) {
+                              input.oninput = _onInputSearch;
+                          });
+                      }
+                  };
+              })(Array.prototype);
+  
+              document.addEventListener('readystatechange', function() {
+                  if (document.readyState === 'complete') {
+                      TableFilter.init();
+                  }
+              });
+  
+          })(document);
+      </script>
+       
+        
+
+<h1></h1>
+<table class="table table-sortable mt32 customers-list" id="s_table">
+  <thead>
+    <tr>
+      <th>Time/Date</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Department</th>
+      <th>Type of User</th>
+      <th>Reason</th>
+      <th>Appointment Request</th>
+      <th>Email</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+   <tbody>
+    {% for x in data %}
+  <tr>
+    <td>{{ x.date }}</td>
+    <td>{{ x.fullnames }}</td>
+    <td>{{ x.address }}</td>
+    <td>{{ x.DEPT }}</td>
+    <td>{{ x.user }}</td>
+    <td>{{ x.reason }}</td> 
+    <td>{{ x.timess }}</td>
+    <td>{{ x.email }}</td>
+    <td>
+      <a href="{% url 'delete' x.id %}" class="btn btn-danger"><i class='bx bx-trash nav_logo-icon'></i></a>
+      <a href="{% url 'delete' x.id %}" class="button"><i class='bx bx-send nav_logo-icon'></i></a>
+    </td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+
+    <script>
+        const icon = document.querySelector('.icon');
+        const search = document.querySelector('.search');
+        icon.onclick = function(){
+            search.classList.toggle('active')
+        }
+        </script>
+    <a href="{% url 'logout' %}"> <button type="button" class="button">Logout</button></a>
+    <button type="button" class="button" data-toggle="modal" data-target="#myModal">SEND</button>
+    <a href="{% url 'createPdf' %}"><button type="button" style="width: 150px;" class="button">Create PDF</button></a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6>SEND HERE !!</h6>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" aria-describedby="emailHelp" name="email" value="">
+                <div class="form-group">
+                  <label for="exampleInputSubject">Subject</label>
+                  <input type="text" name="subject" class="form-control" value="Approval Appointment">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputMessage">Message</label>
+                  <input type="text" name="message" class="form-control" value="The Appointment Time is">
+                </div>
+              <div class="form-group">
+                <label for="exampleInputTime">Time/Date</label>
+                <input type="datetime-local" id="birthdaytime" name="time" class="form-control" value="">
+              </div>
+              <button class="button" type="submit" id="check">Submit</button>
+            </form>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+</body>
+
+</html>
+

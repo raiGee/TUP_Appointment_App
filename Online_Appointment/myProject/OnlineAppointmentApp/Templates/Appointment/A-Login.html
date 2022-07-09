@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Logins</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/A-loginS.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+</head>
+<body>
+	<div class="container">
+		<div class="contact-box">
+			<div class="left"></div>
+			<div class="right">
+                <div class="logo">
+                <img src="{% static './img/logo.png' %}" alt="easyclass" />
+                <h4>Appointment</h4>
+              </div>
+				<h2>Login Form</h2>
+                {% for message in messages %}
+                <h3 id="messages" style="color: red;">{{message}}</h3>
+                {% endfor %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="field" name="username" placeholder="Username" required>
+                    <input type="password" class="field" name="password" placeholder="Password" required> 
+                    Click Here to register an account: <a href="{% url 'areg' %}">sign up</a> 
+                    <br>
+                    <br>
+                    <a href="{% url 'Home' %}"> <button type="button" class="btn">Back</button></a>
+                    <button class="btn" type="submit">Submit</button>
+                </form>
+			</div>
+		</div>
+	</div>
+    <footer class="foots">
+        Online Appointment
+    
+    </footer>
+</body>
+</html>

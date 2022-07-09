@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Visiting Form</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">  
+</head>
+<body>
+	<div class="container">
+		<div class="contact-box">
+			<div class="left">
+                <h2>Checking Appointment</h2>
+            </div>
+			<div class="right">
+                <div class="right">
+                <div class="logo">
+                <img src="{% static './img/logo.png' %}" alt="easyclass" />
+                <h4>Appointment</h4>
+              </div>
+				<h2>Form</h2>
+                {% for message in messages %}
+                <h3 id="messages" style="color: red;">{{message}}</h3>
+                {% endfor %}
+                
+                <form method="POST">
+                {% csrf_token %}
+                {% for datas in allData %}
+                <input type="text" class="field" name="user" value = "{{ datas.users }}" readonly>
+				<input type="text" class="field" name="fullnames" value="{{datas.fullname}}" readonly>
+				<input type="text" class="field" name="email" value="{{datas.emails}}" readonly>
+                <input type="text" class="field" name="contact" value="{{datas.contacts}}" readonly>
+                <input type="hidden" name="gender" value="{{datas.gender}}">
+                <input type="hidden" name="date" id="dates" value="">
+                <input type="text" class="field" name="address" placeholder="Address" required>
+                <input type="datetime-local" id="birthdaytime" name="timess" class="field">
+                <select name="DEPT" id="" class="field" aria-placeholder="DEPARTMENT" required>
+                    <option value="" disabled selected>Department</option>
+                    <option value="Department of Research and Extension">Department of Research and Extension</option>
+                    <option value="Department of Academic Affair">Department of Academic Affair</option>
+                    <option value="Department of Adminstration and Finance">Department of Adminstration and Finance</option>
+                    <option value="Department of Industrial Technology">Department of Industrial Technology</option>
+                    <option value="Department of Industrial Education">Department of Industrial Education</option>
+                    <option value="Department of Engineering">Department of Engineering</option>
+                    <option value="Department of Math and Science">Department of Math and Science</option>
+                    <option value="Department of Liberal Arts">Department of Liberal Arts</option>
+                    <option value="Department of Physical Education">Department of Physical Education</option>
+                    <option value="Department of Industrial Relation and Job Placement">Department of Industrial Relation and Job Placement</option>
+                    <option value="University student Government Office">University student Government Office</option>
+                    <option value="Registrar">Registrar</option>
+				<textarea placeholder="Reason for Visiting" name="reason" class="field" required></textarea>
+                {% endfor %}
+                <a href="{% url 'ulogin' %}"> <button type="button" class="btn">Back</button></a>
+                <button class="btn" type="submit" id="check">Submit</button>
+                </form>
+           
+              
+			</div>
+		</div>
+	</div>
+    </div>
+    <footer class="foots">
+        Online Appointment
+    
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#check').click(function(){
+                var currentdate = new Date(); 
+                var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " - "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+                $('#dates').val(datetime);
+                document.getElementById("dates").innerHTML = datetime;
+            })
+        })
+    </script>
+</body>
+</html>
